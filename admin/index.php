@@ -1,20 +1,16 @@
 <?php
 session_start();
 ob_start();
-// // Require file Common
-// require_once '../commons/env.php'; // Khai báo biến môi trường
-// require_once '../commons/function.php'; // Hàm hỗ trợ
 
-// // Require toàn bộ file Controllers
-// require_once 'controllers/DashboardController.php';
-
-// // Require toàn bộ file Models
-
-// // Route
-// $act = $_GET['act'] ?? '/';
-
-// // Để bảo bảo tính chất chỉ gọi 1 hàm Controller để xử lý request thì mình sử dụng match
-
+if ($_SESSION['user']['loai_nguoi_dung'] === 'NhanVien') {
+  
+} else {
+    // Xóa session nếu không phải nhân viên
+    unset($_SESSION['user']);
+    $_SESSION['thongbao'] = 'Bạn không có quyền truy cập!';
+    header("Location:../index.php?act=dangnhap"); // Quay lại trang đăng nhập
+    exit();
+}
 
 include "../models/pdo.php";
 include "../admin/views/layouts/header.php";
@@ -23,7 +19,18 @@ include "../models/danhmuc.php";
 include "../models/sanpham.php";
 include "../models/nguoidung.php";
 include "../models/binhluan.php";
+include "../models/donhang.php";
 // //controller
+
+$total_orders = count_orders_by_status('Chờ xử lý') + count_orders_by_status('Đang giao') + count_orders_by_status('Hoàn thành');
+$total_revenue = total_revenue();
+$best_selling_products = best_selling_products();
+$total_products_sold = get_total_products_sold();
+$cash_orders = count_orders_by_payment_method(1); // Thanh toán tiền mặt
+$bank_orders = count_orders_by_payment_method(0); // chuyển khoản
+$top_customer = get_top_customer();
+// var_dump($top_customer);
+// die();
 if (isset($_GET['act'])) {
     $act = $_GET['act'];
     switch ($act) {
@@ -116,15 +123,17 @@ if (isset($_GET['act'])) {
             if (isset($_GET['id']) && ($_GET['id'] > 0)) {
                 $sanpham = loadone_sanpham($_GET['id']);
                 $colors = loadone_mausac($_GET['id']);
-                $mau_sac = array(); // Khởi tạo mảng màu sắc rỗng
+               
                 $so_luong = array(); // Khởi tạo mảng số lượng rỗng
+                
                 foreach ($colors as $color) {
                     $mau_sac[] = $color['mau_sac']; // Lưu màu sắc vào mảng
-                    $so_luong[] = $color['so_luong']; // Lưu màu sắc vào mảng
+                   
                 }
+               
             }else {
                 $mau_sac = []; // Nếu không có mã sản phẩm thì khởi tạo mảng màu sắc rỗng
-                $so_luong = []; // Nếu không có mã sản phẩm thì khởi tạo mảng màu sắc rỗng
+               
             }
             $listdanhmuc = loadall_danhmuc();
             include "views/sanpham/update.php";
@@ -200,8 +209,40 @@ if (isset($_GET['act'])) {
                 case 'dangxuat';
                 session_start();
                 session_destroy();
-                header('Location:./index.php');
+                header('Location:../index.php');
                 break;
+
+                case 'admin_donhang':
+                   
+                    $donhangs = get_all_donhangs(); // Lấy tất cả đơn hàng
+                    include 'views/donhang/donhang.php';
+                    break;
+                
+                case 'admin_donhang_detail':
+                    $id = $_GET['id'];
+                    $donhang = get_donhang_by_id($id); // Lấy thông tin đơn hàng
+                    $chitiets = get_chitiet_donhang_by_donhang($id); // Lấy chi tiết đơn hàng
+                    include 'views/donhang/donhang_detail.php';
+                    break;
+                
+                case 'admin_donhang_update':
+                    $id = $_GET['id'];
+                    $donhang = get_donhang_by_id($id); // Lấy thông tin đơn hàng
+                    include 'views/donhang/donhang_update.php';
+                    break;
+                
+                case 'admin_donhang_update_save':
+                    $id = $_POST['ma_don_hang'];
+                    $trang_thai = $_POST['trang_thai'];
+                    update_trang_thai_donhang($id, $trang_thai); // Cập nhật trạng thái đơn hàng
+                    $_SESSION['thongbao'] = "Sửa trạng thái thành công!";
+                    header('Location: index.php?act=admin_donhang');
+                    break;
+               
+                   
+                  
+                    
+
         default:
             include "../admin/views/home.php";
 

@@ -7,12 +7,13 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>Dashboard | NN Shop</title>
+    <title>Dashboard | Mobile Shop</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
 
     <!-- CSS -->
+    <!-- <link rel="icon" type="image/png" href="assets/images/logo/logo.png"> -->
     <?php
     require_once "libs_css.php";
     ?>
@@ -32,7 +33,7 @@
             <div class="d-flex">
                 <!-- LOGO -->
                 <div class="navbar-brand-box horizontal-logo">
-                    <a href="index.html" class="logo logo-dark">
+                    <a href="../index.php" class="logo logo-dark">
                         <span class="logo-sm">
                             <img src="assets/images/logo/logo.png" alt="" height="22">
                         </span>
@@ -41,7 +42,7 @@
                         </span>
                     </a>
 
-                    <a href="index.html" class="logo logo-light">
+                    <a href="../index.php" class="logo logo-light">
                         <span class="logo-sm">
                             <img src="assets/images/logo/logo.png" alt="" height="22">
                         </span>
@@ -87,7 +88,8 @@
                     <div class="dropdown-menu dropdown-menu-end">
                         <!-- item-->
                         <h6 class="dropdown-header">Tuấn Anh</h6>
-                        <a class="dropdown-item" href="index.php?act=dangxuat"><i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span class="align-middle" data-key="t-logout">Logout</span></a>
+                        <a class="dropdown-item" href="index.php?act=dangxuat"><i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span class="align-middle" data-key="t-logout">Đăng Xuất</span></a>
+                        <a class="dropdown-item" href="../index.php"><i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span class="align-middle" data-key="t-logout">Trở Lại trang chủ</span></a>
                     </div>
                 </div>
             </div>

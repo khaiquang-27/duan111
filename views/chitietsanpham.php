@@ -41,52 +41,67 @@
                             </div>
                             <div class="col-lg-7">
                                 <div class="product-details-des">
-                                    <div class="manufacturer-name">
-                                        <a href="product-details.html">HasTech</a>
-                                    </div>
-                                    <h3 class="product-name"><?= $oneproduct['ten_san_pham'] ?></h3>
-
-                                    <div class="price-box">
-                                        <span class="price-regular"><?= number_format($oneproduct['gia']) ?> đ</span>
-
-                                    </div>
-
-                                    <p class="pro-desc"><?= $oneproduct['mo_ta'] ?></p>
-                                    <div class="quantity-cart-box d-flex align-items-center">
-                                        <h6 class="option-title">qty:</h6>
-                                        <div class="quantity">
-                                            <div class="pro-qty"><input type="text" value="1"></div>
+                                    <form action="index.php?act=addtocart" method="post">
+                                        <!-- Tên nhà sản xuất -->
+                                        <div class="manufacturer-name">
+                                            <a href="product-details.html">HasTech</a>
                                         </div>
-                                        <?php
-                  if (isset($_SESSION['user'])) {
-                  ?>
-                                        <div class="action_link">
-                                            <a class="btn btn-cart2" href="#">Thêm Vào giỏ hàng</a>
+
+                                        <!-- Tên sản phẩm -->
+                                        <h3 class="product-name"><?= htmlspecialchars($oneproduct['ten_san_pham']) ?></h3>
+
+                                        <!-- Giá sản phẩm -->
+                                        <div class="price-box">
+                                            <span class="price-regular"><?= number_format($oneproduct['gia']) ?> đ</span>
                                         </div>
-                                        <?php
-                  } else {
-                  ?>
-                                        <div class="action_link">
-                                            <a class="btn btn-cart2" href="index.php?act=dangnhap">Đăng Nhập Để Mua Hàng</a>
+
+                                        <!-- Mô tả sản phẩm -->
+                                        <p class="pro-desc"><?= htmlspecialchars($oneproduct['mo_ta']) ?></p>
+
+                                        <!-- Số lượng sản phẩm -->
+                                        <div class="quantity-cart-box d-flex align-items-center">
+                                            <h6 class="option-title">Số lượng:</h6>
+                                            <div class="quantity">
+                                                <div class="pro-qty">
+                                                    <input type="number" name="so_luong" value="1" min="1">
+                                                </div>
+                                            </div>
                                         </div>
-<?php
-                  }
-                  ?>
-                                    </div>
-                                    <div class="pro-size">
-                                        <h6 class="option-title">Màu :</h6>
-                                        <select class="nice-select">
 
-                                            <?php
-                                            $mau_sac_arr = explode(',', $oneproduct['mau_sac']);
-                                            foreach ($mau_sac_arr as $mau) {
-                                                echo '  <option >' . $mau . '  <a class="color-circle" href="#" style="background-color: ' . trim($mau) . ';" title="' . ucfirst(trim($mau)) . '"></a></option>';
-                                            } ?>
+                                        <!-- Lựa chọn màu sắc -->
+                                        <div class="pro-size">
+                                            <h6 class="option-title">Màu sắc:</h6>
+                                            <select class="nice-select" name="mau_sac" required>
+                                                <?php
+                                                $mau_sac_arr = explode(',', $oneproduct['mau_sac']);
+                                                foreach ($mau_sac_arr as $mau) {
+                                                    $mau = htmlspecialchars(trim($mau));
+                                                    echo "<option value=\"$mau\">" . ucfirst($mau) . "</option>";
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+
+                                        <!-- Các thông tin ẩn -->
+                                        <input type="hidden" name="ma_san_pham" value="<?= htmlspecialchars($oneproduct['ma_san_pham']) ?>">
+                                        <input type="hidden" name="ten_san_pham" value="<?= htmlspecialchars($oneproduct['ten_san_pham']) ?>">
+                                        <input type="hidden" name="gia" value="<?= htmlspecialchars($oneproduct['gia']) ?>">
+                                        <input type="hidden" name="anh_san_pham" value="<?= $anh ?>">
 
 
+                                        <!-- Hành động thêm vào giỏ hàng -->
+                                        <?php if (isset($_SESSION['user'])) { ?>
+                                            <div class="action_link">
+                                                <button type="submit" class="btn btn-cart2">Thêm Vào Giỏ Hàng</button>
+                                            </div>
+                                        <?php } else { ?>
+                                            <div class="action_link">
+                                                <a class="btn btn-cart2" href="index.php?act=dangnhap">Đăng Nhập Để Mua Hàng</a>
+                                            </div>
+                                        <?php } ?>
+                                    </form>
 
-                                        </select>
-                                    </div>
+
 
                                 </div>
                             </div>
@@ -128,7 +143,7 @@
                                             </table>
                                         </div>
                                         <div class="tab-pane fade" id="tab_three">
-                                          
+
                                             <h5>Bình Luận</h5>
                                             <?php
                                             foreach ($load_all_binhluan as $load_all_binhluan) {
@@ -145,7 +160,7 @@
                                                 }
 
                                                 // Hiển thị bình luận với đánh giá sao
-                                                                                                echo '
+                                                echo '
                                                     <div class="total-reviews">
                                                         <div class="rev-avatar">
                                                             <img src="./views/assets/img/user.jpg" alt="">
@@ -160,43 +175,70 @@
                                                             <p>' . $noi_dung . '</p>
                                                         </div>
                                                     </div>';
-                                                                                            }
-                                                                                            ?>
+                                            }
+                                            ?>
 
 
-                                            <form action="#" class="review-form">
-                                                <div class="form-group row">
-                                                    <div class="col">
-                                                        <label class="col-form-label"><span class="text-danger">*</span>
-                                                            Bình Luận Của Bạn</label>
-                                                        <textarea class="form-control" required></textarea>
-                                                        <div class="help-block pt-10"><span
-                                                                class="text-danger">Note:</span>
-                                                            HTML is not translated!
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <div class="col">
-                                                        <label class="col-form-label"><span class="text-danger">*</span>
-                                                            Rating</label>
-                                                        &nbsp;&nbsp;&nbsp; Bad&nbsp;
-                                                        <input type="radio" value="1" name="rating">
-                                                        &nbsp;
-                                                        <input type="radio" value="2" name="rating">
-                                                        &nbsp;
-                                                        <input type="radio" value="3" name="rating">
-                                                        &nbsp;
-                                                        <input type="radio" value="4" name="rating">
-                                                        &nbsp;
-                                                        <input type="radio" value="5" name="rating" checked>
-                                                        &nbsp;Good
-                                                    </div>
-                                                </div>
-                                                <div class="buttons">
-                                                    <button class="btn btn-sqr" type="submit">Continue</button>
-                                                </div>
-                                            </form> <!-- end of review-form -->
+<?php
+if (isset($_SESSION['user']['ma_nguoi_dung'])) {
+    $ma_nguoi_dung = $_SESSION['user']['ma_nguoi_dung'];
+    // Kiểm tra xem người dùng đã mua sản phẩm này hay chưa
+    $check_purchase = check_user_purchase($ma_nguoi_dung, $ma_san_pham);
+    // var_dump($check_purchase);
+    // die();
+
+    if ($check_purchase) {
+        // Hiển thị form bình luận
+        ?>
+        <form action="index.php?act=add_comment" method="POST" class="review-form">
+            <input type="hidden" name="ma_san_pham" value="<?= $ma_san_pham ?>">
+            <input type="hidden" name="ma_nguoi_dung" value="<?= $ma_nguoi_dung ?>">
+            
+            <div class="form-group row">
+                <div class="col">
+                    <label class="col-form-label"><span class="text-danger">*</span> Bình Luận Của Bạn</label>
+                    <textarea class="form-control" name="noi_dung" required></textarea>
+                </div>
+            </div>
+            <div class="form-group row">
+               
+                    <label class="col-form-label"> Đánh Giá</label>
+                    <div class="form-check">
+                        <input type="radio"  value="1" name="danh_gia">
+                        <label class="form-check-label" for="flexRadioDisabled">1 sao</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio"  value="2" name="danh_gia">
+                    <label class="form-check-label" for="flexRadioDisabled">2 sao</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio"  value="3" name="danh_gia">
+                    <label class="form-check-label" for="flexRadioDisabled">3 sao</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio"  value="4" name="danh_gia">
+                    <label class="form-check-label" for="flexRadioDisabled">4 sao</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio"  value="5" name="danh_gia" checked>
+                    <label class="form-check-label" for="flexRadioDisabled">5 sao</label>
+                    </div>
+            
+               
+            </div>
+            <div class="buttons">
+                <button class="btn btn-sqr" type="submit">Gửi Bình Luận</button>
+            </div>
+        </form>
+        <?php
+    } else {
+        echo '<p class="text-danger">Bạn phải mua sản phẩm này trước khi bình luận.</p>';
+    }
+} else {
+    echo '<p class="text-danger">Vui lòng đăng nhập để bình luận.</p>';
+}
+?>
+
                                         </div>
                                     </div>
                                 </div>

@@ -14,24 +14,24 @@
                             <div class="widget-title">
                                 <div class="widget-logo">
                                     <a href="index.html">
-                                        <img src="/views/assets/img/logo/logo.png" alt="brand logo">
+                                        <img src="./views/assets/img/logo/logo.png" alt="brand logo" width="80px" height="80px">
                                     </a>
                                 </div>
                             </div>
                             <div class="widget-body">
-                                <p>We are a team of designers and developers that create high quality wordpress, shopify, Opencart </p>
+                                <p>MOBILESHOP - Hệ Thống 15 Chi Nhánh Bán Lẻ Điện Thoại Trên Toàn Thế Giới </p>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <div class="widget-item">
-                            <h6 class="widget-title">Contact Us</h6>
+                            <h6 class="widget-title">Liên Hệ Với Chúng Tôi</h6>
                             <div class="widget-body">
                                 <address class="contact-block">
                                     <ul>
-                                        <li><i class="pe-7s-home"></i> 4710-4890 Breckinridge USA</li>
-                                        <li><i class="pe-7s-mail"></i> <a href="mailto:demo@plazathemes.com">demo@yourdomain.com </a></li>
-                                        <li><i class="pe-7s-call"></i> <a href="tel:(012)800456789987">(012) 800 456 789-987</a></li>
+                                        <li><i class="pe-7s-home"></i>CD FPTPolytechnic</li>
+                                        <li><i class="pe-7s-mail"></i> <a href="mailto:demo@plazathemes.com">Mobileshop@gmail.com </a></li>
+                                        <li><i class="pe-7s-call"></i> <a href="tel:(012)800456789987">0986866668</a></li>
                                     </ul>
                                 </address>
                             </div>
@@ -39,15 +39,11 @@
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <div class="widget-item">
-                            <h6 class="widget-title">Information</h6>
+                            <h6 class="widget-title">Thông Tin</h6>
                             <div class="widget-body">
                                 <ul class="info-list">
-                                    <li><a href="#">about us</a></li>
-                                    <li><a href="#">Delivery Information</a></li>
-                                    <li><a href="#">privet policy</a></li>
-                                    <li><a href="#">Terms & Conditions</a></li>
-                                    <li><a href="#">contact us</a></li>
-                                    <li><a href="#">site map</a></li>
+                                    <li><a href="chinhsach.php">Về Chúng Tôi</a></li>
+                                    <li><a href="http://localhost/duan1-main/duan111/index.php?act=chinhsach">Chính Sách</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -208,87 +204,6 @@
     </div>
     <!-- Quick view modal end -->
 
-    <!-- offcanvas mini cart start -->
-    <div class="offcanvas-minicart-wrapper">
-        <div class="minicart-inner">
-            <div class="offcanvas-overlay"></div>
-            <div class="minicart-inner-content">
-                <div class="minicart-close">
-                    <i class="pe-7s-close"></i>
-                </div>
-                <div class="minicart-content-box">
-                    <div class="minicart-item-wrapper">
-                        <ul>
-                            <li class="minicart-item">
-                                <div class="minicart-thumb">
-                                    <a href="product-details.html">
-                                        <img src="./views/assets/img/cart/cart-1.jpg" alt="product">
-                                    </a>
-                                </div>
-                                <div class="minicart-content">
-                                    <h3 class="product-name">
-                                        <a href="product-details.html">Dozen White Botanical Linen Dinner Napkins</a>
-                                    </h3>
-                                    <p>
-                                        <span class="cart-quantity">1 <strong>&times;</strong></span>
-                                        <span class="cart-price">$100.00</span>
-                                    </p>
-                                </div>
-                                <button class="minicart-remove"><i class="pe-7s-close"></i></button>
-                            </li>
-                            <li class="minicart-item">
-                                <div class="minicart-thumb">
-                                    <a href="product-details.html">
-                                        <img src="./views/assets/img/cart/cart-2.jpg" alt="product">
-                                    </a>
-                                </div>
-                                <div class="minicart-content">
-                                    <h3 class="product-name">
-                                        <a href="product-details.html">Dozen White Botanical Linen Dinner Napkins</a>
-                                    </h3>
-                                    <p>
-                                        <span class="cart-quantity">1 <strong>&times;</strong></span>
-                                        <span class="cart-price">$80.00</span>
-                                    </p>
-                                </div>
-                                <button class="minicart-remove"><i class="pe-7s-close"></i></button>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="minicart-pricing-box">
-                        <ul>
-                            <li>
-                                <span>sub-total</span>
-                                <span><strong>$300.00</strong></span>
-                            </li>
-                            <li>
-                                <span>Eco Tax (-2.00)</span>
-                                <span><strong>$10.00</strong></span>
-                            </li>
-                            <li>
-                                <span>VAT (20%)</span>
-                                <span><strong>$60.00</strong></span>
-                            </li>
-                            <li class="total">
-                                <span>total</span>
-                                <span><strong>$370.00</strong></span>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="minicart-button">
-                        <a href="cart.html"><i class="fa fa-shopping-cart"></i> View Cart</a>
-                        <a href="cart.html"><i class="fa fa-share"></i> Checkout</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- offcanvas mini cart end -->
-
-    <!-- JS
-============================================ -->
 
     <!-- Modernizer JS -->
      
