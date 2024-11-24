@@ -87,3 +87,47 @@
 </div>
 </div>
 </div>
+<script>
+    // Function to validate the form
+    function validateForm() {
+        // Get form values
+        var tenSanPham = document.querySelector('input[name="ten_san_pham"]').value;
+        var gia = document.querySelector('input[name="gia"]').value;
+        var soLuong = document.querySelector('input[name="so_luong"]').value;
+        var mauSac = document.querySelectorAll('input[name="mau_sac[]"]:checked');
+        
+        // Validate product name
+        if (tenSanPham.trim() === "") {
+            alert("Tên sản phẩm không được để trống.");
+            return false;
+        }
+
+        // Validate price (ensure it's a number)
+        if (gia.trim() === "" || isNaN(gia) || gia <= 0) {
+            alert("Vui lòng nhập giá sản phẩm hợp lệ.");
+            return false;
+        }
+
+        // Validate quantity (ensure it's a number)
+        if (soLuong.trim() === "" || isNaN(soLuong) || soLuong <= 0) {
+            alert("Vui lòng nhập số lượng sản phẩm hợp lệ.");
+            return false;
+        }
+
+        // Validate that at least one color is selected
+        if (mauSac.length === 0) {
+            alert("Vui lòng chọn ít nhất một màu sắc.");
+            return false;
+        }
+
+        // If all checks pass, allow form submission
+        return true;
+    }
+
+    // Attach validation to the form's submit event
+    document.querySelector('form').addEventListener('submit', function(event) {
+        if (!validateForm()) {
+            event.preventDefault(); // Prevent form submission if validation fails
+        }
+    });
+</script>

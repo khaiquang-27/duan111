@@ -30,3 +30,33 @@
         </div>
     </div>
 </div>
+<script>
+    // Hàm kiểm tra form
+    function validateForm() {
+        // Lấy giá trị từ các trường trong form
+        var tenDanhMuc = document.querySelector('input[name="ten_danh_muc"]').value;
+        var moTa = document.querySelector('input[name="mo_ta"]').value;
+
+        // Kiểm tra trường "Tên Danh Mục"
+        if (tenDanhMuc.trim() === "") {
+            alert("Tên danh mục không được để trống.");
+            return false;
+        }
+
+        // Kiểm tra trường "Mô Tả"
+        if (moTa.trim() === "") {
+            alert("Mô tả không được để trống.");
+            return false;
+        }
+
+        // Nếu tất cả các trường hợp kiểm tra hợp lệ, cho phép gửi form
+        return true;
+    }
+
+    // Gắn sự kiện submit cho form
+    document.querySelector('form').addEventListener('submit', function(event) {
+        if (!validateForm()) {
+            event.preventDefault(); // Ngừng việc gửi form nếu kiểm tra không hợp lệ
+        }
+    });
+</script>
